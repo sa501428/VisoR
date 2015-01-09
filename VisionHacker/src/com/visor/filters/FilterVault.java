@@ -14,13 +14,13 @@ public class FilterVault {
 			"varying vec2 textureCoordinate;\n" +
 			"uniform samplerExternalOES s_texture;\n";
 
-	private static String gray = "const vec3 graycoeff = vec3(0.299, 0.587, 0.114);";
+	private static final String gray = "const vec3 graycoeff = vec3(0.299, 0.587, 0.114);";
 
-	private static String dimensionFactors = 
+	private static final String dimensionFactors =
 			"uniform mediump float imageWidthFactor;"+
 					"uniform mediump float imageHeightFactor;";
 
-	private static String conv_HSV_RGB = 
+	private static final String conv_HSV_RGB =
 			"const vec4 Khsv = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);"+
 					"const vec4 Krgb = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);"+
 					"const float e2 = 1.0e-10;"+
@@ -35,19 +35,19 @@ public class FilterVault {
 					"    return c.z * mix(Khsv.xxx, clamp(p - Khsv.xxx, 0.0, 1.0), c.y);"+
 					"}";
 
-	private static String localVectors =
+	private static final String localVectors =
 			"mediump vec2 stp0 = vec2(imageWidthFactor, 0.0);"+
 					"mediump vec2 st0p = vec2(0.0, imageHeightFactor);"+
 					"mediump vec2 stpp = vec2(imageWidthFactor, imageHeightFactor);"+
 					"mediump vec2 stpm = vec2(imageWidthFactor, -imageHeightFactor);";
 
-	private static String localScaledVectors = 
+	private static final String localScaledVectors =
 			"mediump vec2 stp0 = vec2(factor*imageWidthFactor, 0.0);"+
 					"mediump vec2 st0p = vec2(0.0, factor*imageHeightFactor);"+
 					"mediump vec2 stpp = vec2(factor*imageWidthFactor, factor*imageHeightFactor);"+
 					"mediump vec2 stpm = vec2(factor*imageWidthFactor, -factor*imageHeightFactor);";
 
-	private static String extractLocals =
+	private static final String extractLocals =
 			"mediump vec3 textureColor = texture2D(s_texture, textureCoordinate).rgb;"+
 					"mediump float i00   = dot( textureColor, W);"+
 					"mediump float im1m1 = dot( texture2D(s_texture, textureCoordinate - stpp).rgb, W);"+
@@ -358,7 +358,7 @@ public class FilterVault {
 
 	/** Edge Related Shaders **/
 
-	private static String sobelEdge = basics +
+	private static final String sobelEdge = basics +
 			"const mediump float intensity = 1.0;"+
 			dimensionFactors+
 			"const mediump vec3 W = vec3(0.2125, 0.7154, 0.0721);"+
@@ -369,7 +369,7 @@ public class FilterVault {
 			"gl_FragColor = vec4(mix(textureColor, target, intensity), 1.0);"+
 			"}";
 
-	private static String invertedSobelEdge = basics +
+	private static final String invertedSobelEdge = basics +
 			"const mediump float intensity = 1.0;"+
 			dimensionFactors+
 			"const mediump vec3 W = vec3(0.2125, 0.7154, 0.0721);"+
@@ -389,7 +389,7 @@ public class FilterVault {
 			"    gl_FragColor = vec4(vec3(ivec3(Quantize*tex.rgb + vec3(0.5)))/Quantize, tex.a);"+
 			"}";
 
-	private static String sobelCartoon = basics +
+	private static final String sobelCartoon = basics +
 			"const mediump float intensity = 0.5;"+
 			dimensionFactors+
 			"const mediump vec3 W = vec3(0.2125, 0.7154, 0.0721);"+
@@ -455,7 +455,7 @@ public class FilterVault {
 			+ "gl_FragColor = vec4(vec3(0.0), 1.);}"+
 			"}";
 
-	private static String sobelPosterize3 = basics +
+	private static final String sobelPosterize3 = basics +
 			"const mediump float intensity = 0.5;"+
 			dimensionFactors+
 			"const mediump vec3 W = vec3(0.2125, 0.7154, 0.0721);"+
@@ -598,8 +598,8 @@ public class FilterVault {
 		permuteRBG, permuteGRB, permuteGBR, permuteBRG, permuteBGR,
 		invpermuteRBG, invpermuteGRB, invpermuteGBR, invpermuteBRG, invpermuteBGR};
 
-	private static String[] uniformDataNames = {"imageWidthFactor", "imageHeightFactor"};
-	private static float[] uniformDataValues = {(float) 10.0, (float) 10.0};
+	private static final String[] uniformDataNames = {"imageWidthFactor", "imageHeightFactor"};
+	private static final float[] uniformDataValues = {(float) 10.0, (float) 10.0};
 
 
 	public static String[] getAllNames() {
@@ -632,9 +632,7 @@ public class FilterVault {
 	}
 
 	public static void updateUniformValues(float[] updatedUniformValues) {
-		for(int i = 0; i < updatedUniformValues.length; i++){
-			uniformDataValues[i] = updatedUniformValues[i];
-		}
+		System.arraycopy(updatedUniformValues, 0, uniformDataValues, 0, updatedUniformValues.length);
 	}
 }
 

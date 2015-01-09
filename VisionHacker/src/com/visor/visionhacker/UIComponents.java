@@ -14,9 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
 import android.widget.SeekBar.OnSeekBarChangeListener;
-
 import com.visor.streaming.MyRenderer;
-import com.visor.visionhacker.R;
 
 import java.lang.reflect.Field;
 

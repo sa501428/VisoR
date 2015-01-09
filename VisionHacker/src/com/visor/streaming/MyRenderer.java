@@ -96,10 +96,6 @@ public class MyRenderer implements GLSurfaceView.Renderer {
         this.surface = surface;
     }
 
-    public void setSurface(SurfaceTexture _surface) {
-        surface = _surface;
-    }
-
     public void setFilters(int[] filterIndices) {
         this.leftFilterIndex = filterIndices[0];
         this.rightFilterIndex = filterIndices[1];

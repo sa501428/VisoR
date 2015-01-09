@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.visor.filters.FilterVault;
 import com.visor.streaming.MyGLSurfaceView;
 import com.visor.streaming.MyRenderer;
-import com.visor.visionhacker.R;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,7 +26,7 @@ public class MainActivity extends Activity implements SurfaceTexture.OnFrameAvai
     // customizable components
     private static final float[] defaultUniformValues = {(float) 10.0, (float) 10.0};
     private static final int[] settingsOptions = {1, 0, 0, 0};
-    public static int NO_FILTERS = -1;
+    public static final int NO_FILTERS = -1;
     private final CameraAdapter cameraAdapter = new CameraAdapter();
     private final String[] names = FilterVault.getAllNames();
     private final int numFilters = FilterVault.getNumFilters();
@@ -38,9 +37,7 @@ public class MainActivity extends Activity implements SurfaceTexture.OnFrameAvai
     // variables for camera feed
     private boolean isCurrentlyStreaming = false;
     private MyGLSurfaceView glSurfaceView;
-    private SurfaceTexture surface;
     private MyRenderer renderer;
-    private AlertDialog helpDialog, settDialog;
     private UIComponents builder;
     private View myView;
     private ViewGroup vgParent;
@@ -54,8 +51,8 @@ public class MainActivity extends Activity implements SurfaceTexture.OnFrameAvai
         getWindowManager().getDefaultDisplay().getSize(size);
         builder = new UIComponents(this, numFilters, names);
 
-        helpDialog = builder.retrieveHelpDialog();
-        settDialog = builder.retrieveSettingsDialog(settingsOptions);
+        AlertDialog helpDialog = builder.retrieveHelpDialog();
+        AlertDialog settDialog = builder.retrieveSettingsDialog(settingsOptions);
 
         builder.initialUISetup(filterIndices, helpDialog, settDialog);
         defaultUniformValues[0] = (float) (2.0 / (float) size.x);
@@ -172,9 +169,9 @@ public class MainActivity extends Activity implements SurfaceTexture.OnFrameAvai
     }
 
     public void startCamera(int texture) {
-        surface = new SurfaceTexture(texture);
+        SurfaceTexture surface = new SurfaceTexture(texture);
         surface.setOnFrameAvailableListener(this);
-        renderer.setSurface(surface);
+        renderer.setCameraSurface(surface);
         cameraAdapter.setupCamera(surface);
     }
 
