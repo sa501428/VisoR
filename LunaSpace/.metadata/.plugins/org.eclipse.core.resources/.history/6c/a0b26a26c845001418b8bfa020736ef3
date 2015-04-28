@@ -1,0 +1,34 @@
+package com.visor.digitalrain;
+
+import java.util.Random;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.widget.TextView;
+
+public class DigitalRainTextView extends TextView {
+	
+	private Random generator = new Random();
+	private final String alphabet = "QWERTYUIOPASDFGHJKLZXCVBNM1234567890010101010100110010010010010101qwertyuiopasdfghjklzxcvbnm<>,.?;:'12345678901234567890!@#$%^&*()-_+=";
+	private final int N = alphabet.length();
+	
+	String longStringOne = "hfhads834927c8953247rc38n9mcfu834m2rx89m349djm83j49u8fjx04mrxf8934jf89xj3489dm398ny87yIUHBEUIC@Y&*B(@(*$&!)((()+@&(B#*CN%#@UC$*(M@#CI@#UBCJ#B@JGHJDNGjwcbeurgiiiiiBV*&B@*(v!IVBukvbhjfkbdskbfverbcueircneruigceimrxiuercyuerbyuvtcinuouiy784365384695267853nb8b^%^&@#$^*(&@(#&%(*&*!@^&$^!&*@^$%98372957984027359847861826&$BC*&N@$*(#@M*(#UIREWUEGKBJvghjrgdffa834rb9c2qyrnqnxiu3u298cnrb287nx23ze2838c73rnx82^#$$&^B*XB&#*BN@&B^@&BXVCB&B*NX(*GEnwuniiuybxwunxCB&@#**$NVCJWUIXQWUCYb8breuwybrcwunrhiu4br37c87b&B^$@#&^C&N@#*XWJDNU EFB*&@#BC&*RNHD&M@*DWUHibcrhuewbyrbcuaiwknewjhbcfuiwevrbeiuwycr8374567865456$#^%@(^*(@#&^&$@%^%&@$*^&bvvyecrywuevtyrbwuecruyewnxryvwtiuyertbeufhjkdsbafghkjgckjdsngfcjwea4irv327trc8230vgpf[.;,/';gv.er[;ylev[.r;y['.rv.;rehuicbeiwbcreuwbcryweibcruweckrbeiuwbkikxbvueryskulyboqivbeuiybtkrjhvlkjgdbflsuireyjkvht";
+
+	
+	public DigitalRainTextView(Context context) {
+		super(context);
+		this.setBackgroundColor(Color.BLACK);
+		this.setTextSize(5f);
+		setText(longStringOne+longStringOne+longStringOne+longStringOne+longStringOne+longStringOne+longStringOne+longStringOne+longStringOne+longStringOne+longStringOne+longStringOne+longStringOne+longStringOne);
+	}
+	
+	@Override
+	public void onDraw(Canvas canvas){
+		super.onDraw(canvas);
+		this.append( " "+ alphabet.charAt(generator.nextInt(N)));
+		System.out.print(this.getText());
+	}
+	
+
+}

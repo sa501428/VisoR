@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Reality Hacker</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="vol">Volume Button Filter Swiping</string>
+    <string name="xrot">X Axis Rotation</string>
+    <string name="yrot">Y Axis Rotation</string>
+    <string name="zrot">Z Axis Rotation</string>
+    <string name="zero">0</string>
+    <string name="black">#000000</string>
+    <string name="poster">Posterizing Intensity</string>
+    <string name="sobel">Sobel Intensity</string>
+    <string name="toon">Cartoon Tolerance</string>
+    <string name="descFiltr">Switch Filter</string>
+    <string name="descView">Switch Views</string>
+    <string name="descHelp">Help</string>
+    <string name="descMain">Start Viewing</string>
+    
+</resources>

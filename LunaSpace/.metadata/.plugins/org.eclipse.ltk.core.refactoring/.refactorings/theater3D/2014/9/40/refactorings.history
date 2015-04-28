@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.visor.theater3d.SingleEyeRenderer&apos; to &apos;EyeRenderer&apos;&#x0A;- Original project: &apos;theater3D&apos;&#x0A;- Original element: &apos;com.visor.theater3d.SingleEyeRenderer&apos;&#x0A;- Renamed element: &apos;com.visor.theater3d.EyeRenderer&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;SingleEyeRenderer&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.visor.theater3d{SingleEyeRenderer.java[SingleEyeRenderer" matchStrategy="1" name="EyeRenderer" qualified="false" references="true" similarDeclarations="false" stamp="1412099442681" textual="false" version="1.0"/>
+</session>

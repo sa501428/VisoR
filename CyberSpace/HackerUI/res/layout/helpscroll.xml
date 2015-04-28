@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Reality Hacker Version 0.9\n\nSelect a filter, then click the VisoR button to view your world in a new way with a VR headset.
+				\nSwipe on the camera screens or use the volume button to change the filter while viewing.
+				\nUse a fisheye lens to increase your field of view.
+				\nCompatible with Google Cardboard, Durovis Dive, and other VR Headsets.
+				\n\u00A9 2014 VisoR"
+            android:textSize="30sp" />
+        
+    </LinearLayout>
+    
+
+</ScrollView>
