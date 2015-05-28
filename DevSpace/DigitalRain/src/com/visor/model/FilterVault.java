@@ -4,10 +4,22 @@ import java.util.ArrayList;
 
 public class FilterVault {
 
+	private static final String distort = "\n"+
+			"vec4 Distort(vec4 p){"+
+			" vec2 v = p.xy/p.w - vec2(0.5f,0f);"+
+			" float theta  = atan(v.y,v.x);"+
+			" float radius = length(v);"+
+			" radius = pow(radius, 1.5f);"+
+			" v.x = radius * cos(theta);"+
+			" v.y = radius * sin(theta);"+
+			" p.xy = v.xy*p.w;"+
+			" return p;"+
+			"}\n";
+	
 	public static final String vertexShaderCode =
 			"attribute vec4 position;" +
 					"attribute vec2 inputTextureCoordinate;" +
-					"varying vec2 textureCoordinate;" +
+					"varying vec2 textureCoordinate;"+
 					"void main()" +
 					"{"+
 					"  gl_Position = position;"+

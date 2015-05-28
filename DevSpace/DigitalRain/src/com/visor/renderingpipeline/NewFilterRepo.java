@@ -49,6 +49,8 @@ public class NewFilterRepo {
 					"  gl_FragColor = vec4(tex.grba);" +
 					"}";
 	
+	
+	
 	public static final String permuteGBR =
 					"precision mediump float;" +
 					"varying vec2 textureCoordinate;" +
@@ -670,24 +672,118 @@ public class NewFilterRepo {
 			"}";
 	
 	
+	public static final String kuwahara =
+			"precision mediump float;" +
+			"varying vec2 textureCoordinate;"+
+			"uniform sampler2D texture1;" +
+			"const int radius = 2;"+
+			"uniform mediump float imageWidthFactor;"+
+			"uniform mediump float imageHeightFactor;"+
+			"void main (void) {"+
+			"  vec2 uv = textureCoordinate;"+
+	    "float n = float((radius + 1) * (radius + 1));"+
+	    "vec2 sizeScaling = vec2(imageWidthFactor, imageHeightFactor);"+
+	    "vec3 m[4];"+
+	    "vec3 s[4];"+
+	    "for (int k = 0; k < 4; ++k) {"+
+	    "    m[k] = vec3(0.0);"+
+	    "    s[k] = vec3(0.0);"+
+	    "}"+
+	    "for (int j = -radius; j <= radius; ++j)  {"+
+	    "    for (int i = -radius; i <= radius; ++i)  {"+
+	    "        vec3 c = texture2D(texture1, uv + vec2(i,j) * sizeScaling).rgb;"+
+	    "		 vec3 squared = c*c;"+
+	    "		 if(j <= 0){"+
+	    "           if(i <=0){"+
+	    "               m[0] += c;"+
+	    "               s[0] += squared;"+
+	    "           }else{"+
+	    "               m[1] += c;"+
+	    "               s[1] += squared;"+
+	    "           }"+
+	    "        }"+
+	    "        else{"+
+	    "           if(i <=0){"+
+	    "               m[3] += c;"+
+	    "               s[3] += squared;"+
+	    "           }else{"+
+	    "               m[2] += c;"+
+	    "               s[2] += squared;"+
+	    "           }"+
+	    "        }"+
+	    "    }"+
+	    "}"+
+	    
+	    /*"for (int j = -radius; j <= 0; ++j)  {"+
+	    "    for (int i = -radius; i <= 0; ++i)  {"+
+	    "        vec3 c = texture2D(texture1, uv + vec2(i,j) * sizeScaling).rgb;"+
+	    "        m[0] += c;"+
+	    "        s[0] += c * c;"+
+	    "    }"+
+	    "}"+
+	    "for (int j = -radius; j <= 0; ++j)  {"+
+	    "    for (int i = 0; i <= radius; ++i)  {"+
+	    "        vec3 c = texture2D(texture1, uv + vec2(i,j) * sizeScaling).rgb;"+
+	    "        m[1] += c;"+
+	    "        s[1] += c * c;"+
+	    "    }"+
+	    "}"+
+	    "for (int j = 0; j <= radius; ++j)  {"+
+	    "    for (int i = 0; i <= radius; ++i)  {"+
+	    "        vec3 c = texture2D(texture1, uv + vec2(i,j) * sizeScaling).rgb;"+
+	    "        m[2] += c;"+
+	    "        s[2] += c * c;"+
+	    "    }"+
+	    "}"+
+	    "for (int j = 0; j <= radius; ++j)  {"+
+	    "    for (int i = -radius; i <= 0; ++i)  {"+
+	    "        vec3 c = texture2D(texture1, uv + vec2(i,j) * sizeScaling).rgb;"+
+	    "        m[3] += c;"+
+	    "        s[3] += c * c;"+
+	    "    }"+
+	    "}"+
+	    */
+	    "float min_sigma2 = 1e+2;"+
+	    "for (int k = 0; k < 4; ++k) {"+
+	    "    m[k] /= n;"+
+	    "    s[k] = abs(s[k] / n - m[k] * m[k]);"+
+	    "    float sigma2 = s[k].r + s[k].g + s[k].b;"+
+	    "    if (sigma2 < min_sigma2) {"+
+	    "        min_sigma2 = sigma2;"+
+	    "        gl_FragColor = vec4(m[k], 1.0);"+
+	    "    }"+
+	    "}"+
+	    "}";
+	
+	
 
 	private static final String[] names = {"No Filter", "Grayscale", "Inverted",
-		"Sobel Edge", "Inverted Sobel Edge","Sobel Cartoon", "Posterize", "Sobel Posterize",
+		"No Filter",
+		"Sobel Edge", "Inverted Sobel Edge", "Sobel Cartoon", "Posterize", "Sobel Posterize",
 		"Sobel Posterize V2", "Sobel Posterize V3",
-		"Protanopia Simulator","Protanopia Corrected","Deuteranopia Simulator","Deuteranopia Corrected", "Tritanopia Simulator","Tritanopia Corrected",
+		"No Filter",
+		"Protanopia Simulator","Deuteranopia Simulator", "Tritanopia Simulator",
+		"Protanopia Corrected","Deuteranopia Corrected","Tritanopia Corrected",
 		"Red","Green","Blue", "Cyan","Magenta","Yellow",
+		"No Filter",
 		"Red Flash", "Green Flash", "Blue Flash", "Cyan Flash", "Yellow Flash", "Magenta Flash",
 		 "Cartoon Flash", "Random",
-		"Permute RBG", "Permute GRB", "Permute GBR" , "Permute BRG", "Permute BGR",
+		 "No Filter",
+		 "Permute RBG", "Permute GRB", "Permute GBR" , "Permute BRG", "Permute BGR",
 		 "InvPermute RBG", "InvPermute GRB", "InvPermute GBR" , "InvPermute BRG", "InvPermute BGR"};
 
 	public static final String[] shaders = {fragmentShaderCode, fs_GrayCCIR, inverted,
+		fragmentShaderCode,
 		sobelEdge, invertedSobelEdge, sobelCartoon, posterize, sobelPosterize,
 		sobelPosterize2, sobelPosterize3,
-		cb_p,cb_daltonize_p, cb_d, cb_daltonize_d, cb_t, cb_daltonize_t,
+		fragmentShaderCode,
+		cb_p, cb_d, cb_t,
+		cb_daltonize_p, cb_daltonize_d, cb_daltonize_t,
 		red, green, blue, nored, nogreen, noblue,
+		fragmentShaderCode,
 		redFlash, greenFlash, blueFlash, cyanFlash, yellowFlash, magentaFlash,
 		cartoonFlash, random,
+		fragmentShaderCode,
 		permuteRBG, permuteGRB, permuteGBR, permuteBRG, permuteBGR,
 		invpermuteRBG, invpermuteGRB, invpermuteGBR, invpermuteBRG, invpermuteBGR};
 

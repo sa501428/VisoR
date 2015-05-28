@@ -34,7 +34,8 @@ public class CameraAdapter{
 		destroyCamera();
 		mCamera = Camera.open();
 		Camera.Parameters parameters = mCamera.getParameters();
-		parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+		//parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+		parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_INFINITY);
 		mCamera.setParameters(parameters);
 
 		try

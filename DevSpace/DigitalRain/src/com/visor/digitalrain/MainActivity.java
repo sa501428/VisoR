@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
+import com.oculus.svclib.*;
 
 public class MainActivity extends Activity implements SurfaceTexture.OnFrameAvailableListener{
 
@@ -23,6 +24,7 @@ public class MainActivity extends Activity implements SurfaceTexture.OnFrameAvai
 	private CameraAdapter cameraAdapter = new CameraAdapter(this);
 	//private RecordingAdapter recordingAdapter;
 
+	private boolean oculusVersionEnabled = false;
 
 	private int[] images = {R.drawable.page0, R.drawable.page1, R.drawable.page2, R.drawable.page3,
 			R.drawable.page4, R.drawable.page5, R.drawable.page6, R.drawable.page7, R.drawable.page8,
@@ -38,6 +40,8 @@ public class MainActivity extends Activity implements SurfaceTexture.OnFrameAvai
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+		if(oculusVersionEnabled)
+			OVREntitlementChecker.doAutomatedCheck(this);
 
 		glSurfaceView = new MyGLSurfaceView(this, cameraAdapter, images);
 		setContentView(glSurfaceView);
