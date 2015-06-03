@@ -45,7 +45,7 @@ public class MyRenderer implements GLSurfaceView.Renderer{
 		//triangleBoundsLeft = [-1 0 1 -1]  right = [0 1 1 -1]
 		ScreenMesh leftScreenMesh = new ScreenMesh(3,new float[]{-1f, 0f, 1f, -1f},0f);
 		ScreenMesh rightScreenMesh = new ScreenMesh(9,new float[]{0f, 1f, 1f, -1f},0f);
-		rightScreenMesh.manipulateTriangleGrid(2, 3, 0, -.04);
+		/*rightScreenMesh.manipulateTriangleGrid(2, 3, 0, -.04);
 		rightScreenMesh.manipulateTriangleGrid(2, 4, 0, -.08);
 		rightScreenMesh.manipulateTriangleGrid(2, 5, 0, -.06);
 		
@@ -66,7 +66,8 @@ public class MyRenderer implements GLSurfaceView.Renderer{
 		rightScreenMesh.manipulateTriangleGrid(5, 4, .02, .04);
 		rightScreenMesh.manipulateTriangleGrid(5, 5, 0, 0);
 		rightScreenMesh.manipulateTriangleGrid(5, 6, 0, -.02);
-		
+		*/
+		/*
 		for(float f : leftScreenMesh.getTextureVertices()){
 			System.out.print(f+" ");
 		}
@@ -81,6 +82,7 @@ public class MyRenderer implements GLSurfaceView.Renderer{
 			System.out.print(f+" ");
 		}
 		System.out.println("");
+		*/
 		
 		
 		cameraStreamLeft = new CameraStreaming(leftScreenMesh);

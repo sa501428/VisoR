@@ -24,7 +24,7 @@ public class MainActivity extends Activity implements SurfaceTexture.OnFrameAvai
 	private CameraAdapter cameraAdapter = new CameraAdapter(this);
 	//private RecordingAdapter recordingAdapter;
 
-	private boolean oculusVersionEnabled = false;
+	private boolean oculusVersionEnabled = true;
 
 	private int[] images = {R.drawable.page0, R.drawable.page1, R.drawable.page2, R.drawable.page3,
 			R.drawable.page4, R.drawable.page5, R.drawable.page6, R.drawable.page7, R.drawable.page8,
